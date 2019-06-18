@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { addTodo, toggleCompleted, deleteTodo } from "../actions";
 import Form from "./Form";
+import { FaTrashAlt, FaCheck, FaUndo } from "react-icons/fa";
 
 class TodoList extends React.Component {
   constructor() {
@@ -15,24 +16,39 @@ class TodoList extends React.Component {
 
   deleteTodo = (e, id) => {
     e.preventDefault();
-    this.props.deleteTodo(id)
-  }
+    this.props.deleteTodo(id);
+  };
 
   render() {
     return (
-      <div className="todo-list-container">
-        <h2>To-Do List</h2>
-        {this.props.todos.map(todo => (
-          <div className="todo-item" key={todo.id} >
-            <p onClick={(e)=>this.toggleCompleted(e, todo.id)} key={todo.id}>{todo.task}</p> 
-            {todo.completed? <span>Completed</span>: <span>Unatained</span>}
-            <button onClick={e =>this.deleteTodo(e, todo.id)}>Delete Item</button>
-          </div>
-
-          //   <Todo key={todo.id} task={todo.task} toggleCompleted={toggleCompleted}/>
-        ))}
+      <>
+        <header>
+          <h2>To-Do List</h2>
+        </header>
         <Form />
-      </div>
+        <div className="todo-list-container">
+          {this.props.todos.map(todo => (
+            <div className="todo-item" key={todo.id}>
+              <h4>{todo.task}</h4>
+              <p><strong>Status: </strong>
+              {todo.completed ? <span>Completed</span> : <span>Incomplete</span>}
+              </p>
+              {!todo.completed ? (
+                <FaCheck className="icon check"
+                  onClick={e => this.toggleCompleted(e, todo.id)}
+                  key={todo.id}
+                />
+              ) : (
+                <FaUndo className="icon undo"
+                  onClick={e => this.toggleCompleted(e, todo.id)}
+                  key={todo.id}
+                />
+              )}
+              <FaTrashAlt className="icon trash" onClick={e => this.deleteTodo(e, todo.id)} />
+            </div>
+          ))}
+        </div>
+      </>
     );
   }
 }

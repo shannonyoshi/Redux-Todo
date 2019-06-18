@@ -4,7 +4,7 @@ const initialState = {
   todos: [
     {
       id: Date.now(),
-      task: "create to-do list",
+      task: "Create To-Do list",
       completed: false
     }
   ]

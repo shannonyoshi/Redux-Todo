@@ -31,3 +31,23 @@
     transform: rotate(360deg);
   }
 }
+header {
+  height:50px;
+}
+.todo-list-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.todo-item{
+  width: 300px;
+  border: 1px solid lightgray;
+  padding: .5em;
+  margin: 1em;
+  color: white;
+  background-image: linear-gradient(teal, #32B2B2)
+}
+
+.icon{
+  padding: .5em;
+}
